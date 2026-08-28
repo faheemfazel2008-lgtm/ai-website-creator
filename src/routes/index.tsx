@@ -132,6 +132,7 @@ function Index() {
   const [busy, setBusy] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const timerRef = useRef<number | null>(null);
+  const doneRef = useRef(false);
 
   const step = site ? 3 : idea.trim() ? (type ? 2 : 1) : 0;
 
