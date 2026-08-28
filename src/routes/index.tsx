@@ -144,6 +144,7 @@ function Index() {
     if (generating) return;
     setGenerating(true);
     setProgress(0);
+    doneRef.current = false;
     if (timerRef.current) window.clearInterval(timerRef.current);
     timerRef.current = window.setInterval(() => {
       setProgress((p) => {
@@ -153,18 +154,21 @@ function Index() {
             window.clearInterval(timerRef.current);
             timerRef.current = null;
           }
-          window.setTimeout(() => {
-            setSite(generateSite(idea, type));
-            setGenerating(false);
-            setProgress(100);
-            setMessages((m) => [
-              ...m,
-              {
-                role: "ai",
-                text: `Generated a ${type.toLowerCase()} site from your idea. Try “make it blue” or “add a testimonials section”.`,
-              },
-            ]);
-          }, 350);
+          if (!doneRef.current) {
+            doneRef.current = true;
+            window.setTimeout(() => {
+              setSite(generateSite(idea, type));
+              setGenerating(false);
+              setProgress(100);
+              setMessages((m) => [
+                ...m,
+                {
+                  role: "ai",
+                  text: `Generated a ${type.toLowerCase()} site from your idea. Try “make it blue” or “add a testimonials section”.`,
+                },
+              ]);
+            }, 350);
+          }
           return 100;
         }
         return next;
