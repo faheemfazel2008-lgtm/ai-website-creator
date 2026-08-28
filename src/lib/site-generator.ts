@@ -151,8 +151,8 @@ export function deriveName(idea: string, type: SiteType): string {
     "build", "make", "me", "my", "about", "page", "web", "please",
   ]);
   const words = clean.split(/\s+/).filter((w) => w.length > 2 && !stop.has(w.toLowerCase()));
-  if (words.length >= 2) return titleCase(`${words[0]} ${words[1]}`);
-  if (words.length === 1) return titleCase(words[0]);
+  if (words.length >= 2) return titleCase(`${words[0]!} ${words[1]!}`);
+  if (words.length === 1) return titleCase(words[0]!);
   return TEMPLATES[type].defaultName;
 }
 
