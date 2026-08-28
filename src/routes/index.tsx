@@ -149,7 +149,10 @@ function Index() {
       setProgress((p) => {
         const next = p + 4 + Math.random() * 7;
         if (next >= 100) {
-          if (timerRef.current) window.clearInterval(timerRef.current);
+          if (timerRef.current) {
+            window.clearInterval(timerRef.current);
+            timerRef.current = null;
+          }
           window.setTimeout(() => {
             setSite(generateSite(idea, type));
             setGenerating(false);
